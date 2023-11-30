@@ -1,8 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
 import style from './style.module.css';
+import ImageGalleryItem from 'components/ImageGalleryItem';
 
-const Gallery = () => {
-  return <ul className={style.gallery}>imagine</ul>;
+const ImageGallery = ({ images, onClickImage }) => {
+  return (
+    <ul className={style.ImageGallery}>
+      {images.map(({ id, webformatURL, largeImageURL, tags }) => (
+        <ImageGalleryItem
+          key={id}
+          webformatURL={webformatURL}
+          tags={tags}
+          onClickImage={() => onClickImage(largeImageURL, tags)}
+        />
+      ))}
+    </ul>
+  );
 };
 
-export default Gallery;
+export default ImageGallery;
