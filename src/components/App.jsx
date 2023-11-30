@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import SearchBar from './Searchbar';
+import Searchbar from './Searchbar';
 import ImageGallery from './ImageGallery';
 import Loader from './Loader';
 import LoadMoreBtn from './LoadMoreBtn';
@@ -91,7 +91,7 @@ export class App extends Component {
 
     return (
       <div>
-        <SearchBar onSubmit={this.handleSearchSubmit} />
+        <Searchbar onSubmit={this.handleSearchSubmit} />
         {isLoading && <Loader />}
         <ImageGallery images={images} onClickImage={this.onClickImage} />
         {isVisible && (
