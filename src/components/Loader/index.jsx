@@ -1,15 +1,19 @@
-import { Blocks } from 'react-loader-spinner';
+import { Bars } from 'react-loader-spinner';
+import style from './style.module.css';
 
 const Loader = () => {
   return (
-    <Blocks
-      visible={true}
-      height="80"
-      width="80"
-      ariaLabel="blocks-loading"
-      wrapperStyle={{}}
-      wrapperClass="blocks-wrapper"
-    />
+    <div className={style.loaderWrap}>
+      <Bars
+        height="80"
+        width="80"
+        color="#4fa94d"
+        ariaLabel="bars-loading"
+        wrapperStyle={{}}
+        wrapperClass=""
+        visible={true}
+      />
+    </div>
   );
 };
 

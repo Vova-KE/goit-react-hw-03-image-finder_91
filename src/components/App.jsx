@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Searchbar from './Searchbar';
+
+import Button from './Button';
 import ImageGallery from './ImageGallery';
 import Loader from './Loader';
-import LoadMoreBtn from './LoadMoreBtn';
 import Modal from './Modal';
+import SearchBar from './SearchBar';
 
-const API_URL = 'https://pixabay.com/api/';
+const BASE_URL = 'https://pixabay.com/api/';
 const API_KEY = '27785613-3c730127b1356d079421a0eb8';
 const searchParams = new URLSearchParams({
   image_type: 'photo',
@@ -17,29 +18,29 @@ const searchParams = new URLSearchParams({
 export class App extends Component {
   state = {
     query: '',
-    isLoading: false,
-    page: '1',
-    per_page: '12',
-    error: null,
+    page: 1,
     images: [],
     isVisible: false,
+    error: null,
+    isLoading: false,
+    per_page: 12,
     isModalOpen: false,
     modalImage: '',
   };
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(_, prevState) {
     const { query, page, per_page } = this.state;
 
     if (prevState.query !== query || prevState.page !== page) {
       this.setState({ isLoading: true });
 
       fetch(
-        `${API_URL}?q=${query}&page=${page}&key=${API_KEY}&${searchParams}&per_page=${per_page}`
+        `${BASE_URL}?q=${query}&page=${page}&key=${API_KEY}&${searchParams}&per_page=${per_page}`
       )
         .then(response => response.json())
         .then(images => {
           if (images.hits.length === 0) {
-            toast.error('There are no photos');
+            toast.error('There are no images');
           }
 
           this.setState(prevState => ({
@@ -91,11 +92,11 @@ export class App extends Component {
 
     return (
       <div>
-        <Searchbar onSubmit={this.handleSearchSubmit} />
+        <SearchBar onSubmit={this.handleSearchSubmit} />
         {isLoading && <Loader />}
         <ImageGallery images={images} onClickImage={this.onClickImage} />
         {isVisible && (
-          <LoadMoreBtn isLoading={isLoading} onClick={this.handleLoadMore} />
+          <Button isLoading={isLoading} onClick={this.handleLoadMore} />
         )}
         {isModalOpen && (
           <Modal modalImage={modalImage} onModalClose={this.handleModalClose} />
