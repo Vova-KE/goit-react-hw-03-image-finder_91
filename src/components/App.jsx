@@ -6,7 +6,7 @@ import Button from './Button';
 import ImageGallery from './ImageGallery';
 import Loader from './Loader';
 import Modal from './Modal';
-import SearchBar from './SearchBar';
+import Searchbar from './Searchbar';
 
 const BASE_URL = 'https://pixabay.com/api/';
 const API_KEY = '27785613-3c730127b1356d079421a0eb8';
@@ -92,7 +92,7 @@ export class App extends Component {
 
     return (
       <div>
-        <SearchBar onSubmit={this.handleSearchSubmit} />
+        <Searchbar onSubmit={this.handleSearchSubmit} />
         {isLoading && <Loader />}
         <ImageGallery images={images} onClickImage={this.onClickImage} />
         {isVisible && (
